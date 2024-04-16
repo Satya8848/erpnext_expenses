@@ -83,7 +83,7 @@ class ExpensesEntry(Document):
     def before_update_after_submit(self):
         clear_doc_cache(self.doctype, self.name)
         for f in self.meta.get("fields", []):
-            if not cint(f.allow_on_submit) andself.has_value_changed(f.fieldname):
+            if not cint(f.allow_on_submit) and self.has_value_changed(f.fieldname):
                 self._error(_("The expenses entry cannot be modified after {0}.")
                     .format(_("submit") if self.docstatus.is_submitted() else _("cancel")))
                 break
